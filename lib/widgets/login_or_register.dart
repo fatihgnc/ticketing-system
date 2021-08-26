@@ -124,6 +124,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                   if (_isLogin)
                     // EMAIL
                     TextFormField(
+                      keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.email),
                         hintText: 'Email ID',
