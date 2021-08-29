@@ -36,10 +36,21 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: _isLogin ? const Text('Register') : const Text('Log in'),
         actions: [
           TextButton(
-            child: _isLogin ? const Text('Log in') : const Text('Register'),
+            child: _isLogin
+                ? const Text(
+                    'Log in',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  )
+                : const Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
             onPressed: () {
               setState(() {
                 _isLogin = !_isLogin;
@@ -70,19 +81,14 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
         ),
         padding: const EdgeInsets.all(10),
         width: double.infinity,
-        height: deviceHeight * 0.5,
+        height: deviceHeight * 0.55,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               _isLogin ? 'REGISTER' : 'LOGIN',
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                letterSpacing: 2.5,
-              ),
+              style: Theme.of(context).textTheme.headline4,
             ),
             Form(
               key: _formKey,
@@ -90,6 +96,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                 children: [
                   // USERNAME
                   TextFormField(
+                    key: ValueKey('username'),
                     decoration: const InputDecoration(
                       icon: const Icon(Icons.person),
                       hintText: 'Username',
@@ -107,6 +114,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                   if (_isLogin)
                     // NAME
                     TextFormField(
+                      key: ValueKey('name'),
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.text_format),
                         hintText: 'Name',
@@ -124,6 +132,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                   if (_isLogin)
                     // EMAIL
                     TextFormField(
+                      key: ValueKey('email'),
                       keyboardType: TextInputType.emailAddress,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.email),
@@ -141,6 +150,7 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
                     ),
                   // PASSWORD
                   TextFormField(
+                    key: ValueKey('password'),
                     decoration: const InputDecoration(
                       icon: Icon(Icons.password),
                       hintText: 'Password',
