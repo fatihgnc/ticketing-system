@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:ticketing_system/screens/add_request_screen.dart';
+import 'package:ticketing_system/screens/contact_screen.dart';
+import 'package:ticketing_system/screens/main_screen.dart';
+import 'package:ticketing_system/screens/settings_screen.dart';
+import 'package:ticketing_system/widgets/tickets.dart';
 
 import './drawer_item.dart';
 
 class MainDrawer extends StatelessWidget {
-  void _selectFn() {}
+  void _selectFn(BuildContext context, String routeName) {
+    Navigator.of(context).pushNamed(routeName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,14 +79,20 @@ class MainDrawer extends StatelessWidget {
               child: ListView(
                 children: [
                   DrawerItem(
-                    tileIcon: Icons.ac_unit,
+                    tileIcon: Icons.text_snippet,
                     tileText: 'Requests',
-                    selectFn: _selectFn,
+                    selectFn: () => _selectFn(
+                      context,
+                      MainScreen.routeName,
+                    ),
                   ),
                   DrawerItem(
-                    tileIcon: Icons.bookmark_add,
+                    tileIcon: Icons.add_task,
                     tileText: 'Add Request',
-                    selectFn: _selectFn,
+                    selectFn: () => _selectFn(
+                      context,
+                      AddRequestScreen.routeName,
+                    ),
                   ),
                   Divider(
                     height: 5,
@@ -87,17 +100,23 @@ class MainDrawer extends StatelessWidget {
                   DrawerItem(
                     tileIcon: Icons.settings,
                     tileText: 'Settings',
-                    selectFn: _selectFn,
+                    selectFn: () => _selectFn(
+                      context,
+                      SettingsScreen.routeName,
+                    ),
                   ),
                   DrawerItem(
                     tileIcon: Icons.contacts,
-                    tileText: 'Contacts',
-                    selectFn: _selectFn,
+                    tileText: 'Contact',
+                    selectFn: () => _selectFn(
+                      context,
+                      ContactScreen.routeName,
+                    ),
                   ),
                   DrawerItem(
                     tileIcon: Icons.logout,
                     tileText: 'Log out',
-                    selectFn: _selectFn,
+                    selectFn: () {},
                   ),
                 ],
               ),

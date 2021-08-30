@@ -64,7 +64,7 @@ class _TicketsState extends State<Tickets> {
                       Positioned(
                         top: 15,
                         child: Text(
-                          tickets[i].ticketID,
+                          tickets[i].ticketSenderPhone,
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 17,
@@ -88,11 +88,11 @@ class _TicketsState extends State<Tickets> {
                           tickets[i].ticketSender +
                               ' - ' +
                               _ticketPriorityLevel(
-                                tickets[i].ticketPriority,
+                                tickets[i].ticketPriority!,
                               ) +
                               ' - ' +
                               _ticketStatus(
-                                tickets[i].ticketStatus,
+                                tickets[i].ticketStatus!,
                               ),
                           style: TextStyle(
                             color: Colors.grey,
@@ -119,7 +119,7 @@ class _TicketsState extends State<Tickets> {
                         right: 10,
                         child: tickets[i].ticketPriority == TicketPriority.Dusuk
                             ? Icon(
-                                Icons.more_time,
+                                Icons.access_time,
                                 color: Colors.red,
                                 size: 30,
                               )

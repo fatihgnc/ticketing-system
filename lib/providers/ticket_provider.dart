@@ -4,23 +4,26 @@ import 'package:ticketing_system/models/ticket.dart';
 class TicketProvider with ChangeNotifier {
   List<Ticket> _tickets = [
     Ticket(
-      ticketID: '1',
       ticketTitle: 'FİYAT İSTEK',
       ticketSender: 'Mehmet İlkbahar',
+      ticketSenderPhone: '#1',
+      ticketDescription: 'Fiyat isteniyor!',
       ticketPriority: TicketPriority.Yuksek,
       ticketStatus: TicketStatus.Beklemede,
     ),
     Ticket(
-      ticketID: '2',
       ticketTitle: 'FİYAT İSTEK2',
+      ticketDescription: 'Fiyat isteniyor!2',
       ticketSender: 'Hasan İlkbahar',
+      ticketSenderPhone: '#2',
       ticketPriority: TicketPriority.Normal,
       ticketStatus: TicketStatus.Beklemede,
     ),
     Ticket(
-      ticketID: '3',
       ticketTitle: 'FİYAT İSTEK3',
+      ticketDescription: 'Fiyat isteniyor!3',
       ticketSender: 'MMM İlkbahar',
+      ticketSenderPhone: '#3',
       ticketPriority: TicketPriority.Dusuk,
       ticketStatus: TicketStatus.Beklemede,
     ),
@@ -28,5 +31,10 @@ class TicketProvider with ChangeNotifier {
 
   List<Ticket> get tickets {
     return [..._tickets];
+  }
+
+  void addTicket(Ticket newTicket) {
+    _tickets.add(newTicket);
+    notifyListeners();
   }
 }
