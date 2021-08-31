@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String _dropdownValue = 'resolved';
+  String _dropdownValue = 'pending';
 
   void _setDropdown(String newVal) {
     setState(() {

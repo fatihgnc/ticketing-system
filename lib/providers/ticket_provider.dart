@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:ticketing_system/models/ticket.dart';
 
@@ -41,6 +43,7 @@ class TicketProvider with ChangeNotifier {
 
   void addTicket(Ticket newTicket) {
     _tickets.add(newTicket);
+    inspect(_tickets);
     notifyListeners();
   }
 

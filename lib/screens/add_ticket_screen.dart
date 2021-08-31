@@ -1,5 +1,7 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ticketing_system/models/ticket.dart';
@@ -89,6 +91,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
     required String labelText,
     required String? Function(String? inputVal) validator,
     required TextEditingController controller,
+    int? maxLines,
     TextInputType? keyboardType,
     bool? obscureText,
   }) {
@@ -96,6 +99,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
       key: ValueKey(keyName),
       keyboardType: keyboardType,
       controller: controller,
+      maxLines: maxLines,
       obscureText: obscureText ?? false,
       decoration: InputDecoration(
         labelText: labelText,
@@ -267,6 +271,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                   _buildTextField(
                     keyName: 'description',
                     labelText: 'Ticket Description',
+                    maxLines: 3,
                     validator: (inputVal) => _validateInput(
                       inputVal: inputVal!,
                       shouldCheckContains: false,
@@ -274,6 +279,20 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
                     ),
                     controller: _descriptionController,
                   ),
+                  TextButton(
+                    onPressed: () async {
+                      FilePickerResult? result =
+                          await FilePicker.platform.pickFiles();
+
+                      if (result != null) {
+                        File file = File(result.files.single.path);
+                        if (file.lengthSync() > 1000 * 1000 * 15) {
+                          return;
+                        }
+                      }
+                    },
+                    child: const Text('Upload File'),
+                  )
                 ],
               ),
             ),

@@ -20,7 +20,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
-    final userInfo = Provider.of<UserProvider>(context, listen: false).user;
+    final userInfo = Provider.of<UserProvider>(context).user;
 
     return Drawer(
       child: Column(

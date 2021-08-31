@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
@@ -45,8 +44,9 @@ class UserProvider with ChangeNotifier {
     );
     isAuth = true;
     _authenticatedUser = user;
-    inspect(_authenticatedUser);
     notifyListeners();
+    inspect(_authenticatedUser);
+    inspect(_users);
   }
 
   void logoutUser() async {

@@ -34,34 +34,37 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<UserProvider>(
-        builder: (ctx, user, _) => MaterialApp(
-          title: 'Ticket App',
-          theme: ThemeData(
-            fontFamily: GoogleFonts.workSans().fontFamily,
-            primarySwatch: Colors.blue,
-            primaryColor: Colors.grey.shade900,
-            accentColor: Colors.white,
-            textTheme: TextTheme(
-              headline4: TextStyle(
-                color: Colors.blue,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                letterSpacing: 2.5,
+        builder: (ctx, user, _) {
+          print(user.isAuth);
+          return MaterialApp(
+            title: 'Ticket App',
+            theme: ThemeData(
+              fontFamily: GoogleFonts.workSans().fontFamily,
+              primarySwatch: Colors.blue,
+              primaryColor: Colors.grey.shade900,
+              accentColor: Colors.white,
+              textTheme: TextTheme(
+                headline4: TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  letterSpacing: 2.5,
+                ),
               ),
             ),
-          ),
-          home: user.isAuth ? MainScreen() : LoginScreen(),
-          routes: {
-            MainScreen.routeName: (ctx) => MainScreen(),
-            AddRequestScreen.routeName: (ctx) => AddRequestScreen(),
-            SettingsScreen.routeName: (ctx) => SettingsScreen(),
-            ContactScreen.routeName: (ctx) => ContactScreen(),
-            LoginScreen.routeName: (ctx) => LoginScreen(),
-            RegisterScreen.routeName: (ctx) => RegisterScreen(),
-            TicketDetailScreen.routeName: (ctx) => TicketDetailScreen(),
-            ForgotPasswordScreen.routeName: (ctx) => ForgotPasswordScreen(),
-          },
-        ),
+            home: user.isAuth ? MainScreen() : LoginScreen(),
+            routes: {
+              MainScreen.routeName: (ctx) => MainScreen(),
+              AddRequestScreen.routeName: (ctx) => AddRequestScreen(),
+              SettingsScreen.routeName: (ctx) => SettingsScreen(),
+              ContactScreen.routeName: (ctx) => ContactScreen(),
+              LoginScreen.routeName: (ctx) => LoginScreen(),
+              RegisterScreen.routeName: (ctx) => RegisterScreen(),
+              TicketDetailScreen.routeName: (ctx) => TicketDetailScreen(),
+              ForgotPasswordScreen.routeName: (ctx) => ForgotPasswordScreen(),
+            },
+          );
+        },
       ),
     );
   }

@@ -118,6 +118,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
+                  CheckboxListTile(
+                    value: _rememberMe,
+                    title: const Text('Remember me'),
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: Colors.blue,
+                    onChanged: (val) {
+                      setState(() {
+                        _rememberMe = val!;
+                      });
+                    },
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -149,17 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       'Forgot password?',
                     ),
-                  ),
-                  CheckboxListTile(
-                    value: _rememberMe,
-                    title: const Text('Remember me'),
-                    controlAffinity: ListTileControlAffinity.leading,
-                    activeColor: Colors.blue,
-                    onChanged: (val) {
-                      setState(() {
-                        _rememberMe = val!;
-                      });
-                    },
                   ),
                 ],
               ),
