@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:ticketing_system/models/ticket.dart';
+import 'package:ticketing_system/providers/ticket_provider.dart';
 import 'package:ticketing_system/screens/add_request_screen.dart';
 import 'package:ticketing_system/widgets/drawer_item.dart';
 import 'package:ticketing_system/widgets/main_drawer.dart';
@@ -15,11 +18,19 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  String _dropdownValue = 'resolved';
+
+  void _setDropdown(String newVal) {
+    setState(() {
+      _dropdownValue = newVal;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: MainDropdown(),
+        title: MainDropdown(_setDropdown, _dropdownValue),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
@@ -32,14 +43,14 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       drawer: MainDrawer(),
-      body: Tickets(),
+      body: Tickets(_dropdownValue),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(AddRequestScreen.routeName);
-        },
         child: const Icon(Icons.add),
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Theme.of(context).accentColor,
+        onPressed: () {
+          Navigator.of(context).pushNamed(AddRequestScreen.routeName);
+        },
       ),
     );
   }

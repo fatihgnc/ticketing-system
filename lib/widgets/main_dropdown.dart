@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class MainDropdown extends StatefulWidget {
-  const MainDropdown({Key? key}) : super(key: key);
+  final Function setDropdownValue;
+  final String dropdownValue;
+
+  MainDropdown(this.setDropdownValue, this.dropdownValue);
 
   @override
   _MainDropdownState createState() => _MainDropdownState();
 }
 
 class _MainDropdownState extends State<MainDropdown> {
-  String _dropdownValue = 'pending';
   final List<DropdownMenuItem<String>> _dropdownItems = [
     DropdownMenuItem(
       child: Text('Pending Requests'),
@@ -17,10 +19,6 @@ class _MainDropdownState extends State<MainDropdown> {
     DropdownMenuItem(
       child: Text('Resolved Requests'),
       value: 'resolved',
-    ),
-    DropdownMenuItem(
-      child: Text('Canceled Requests'),
-      value: 'canceled',
     ),
   ];
 
@@ -31,7 +29,7 @@ class _MainDropdownState extends State<MainDropdown> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         DropdownButton(
-          value: _dropdownValue,
+          value: widget.dropdownValue,
           items: _dropdownItems,
           dropdownColor: Colors.black,
           style: TextStyle(
@@ -41,11 +39,7 @@ class _MainDropdownState extends State<MainDropdown> {
           underline: Container(
             height: 0,
           ),
-          onChanged: (changeVal) {
-            setState(() {
-              _dropdownValue = changeVal as String;
-            });
-          },
+          onChanged: (newVal) => widget.setDropdownValue(newVal),
         ),
       ],
     );

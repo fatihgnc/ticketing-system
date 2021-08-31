@@ -4,28 +4,31 @@ import 'package:ticketing_system/models/ticket.dart';
 class TicketProvider with ChangeNotifier {
   List<Ticket> _tickets = [
     Ticket(
-      ticketTitle: 'FİYAT İSTEK',
-      ticketSender: 'Mehmet İlkbahar',
-      ticketSenderPhone: '#1',
-      ticketDescription: 'Fiyat isteniyor!',
-      ticketPriority: TicketPriority.Yuksek,
-      ticketStatus: TicketStatus.Beklemede,
+      title: 'FİYAT İSTEK',
+      sender: 'Mehmet İlkbahar',
+      senderPhone: '#1',
+      description: 'Fiyat isteniyor!',
+      priority: TicketPriority.Yuksek,
+      status: TicketStatus.Beklemede,
+      isSelected: false,
     ),
     Ticket(
-      ticketTitle: 'FİYAT İSTEK2',
-      ticketDescription: 'Fiyat isteniyor!2',
-      ticketSender: 'Hasan İlkbahar',
-      ticketSenderPhone: '#2',
-      ticketPriority: TicketPriority.Normal,
-      ticketStatus: TicketStatus.Beklemede,
+      title: 'FİYAT İSTEK2',
+      description: 'Fiyat isteniyor!2',
+      sender: 'Hasan İlkbahar',
+      senderPhone: '#2',
+      priority: TicketPriority.Orta,
+      status: TicketStatus.Halledildi,
+      isSelected: false,
     ),
     Ticket(
-      ticketTitle: 'FİYAT İSTEK3',
-      ticketDescription: 'Fiyat isteniyor!3',
-      ticketSender: 'MMM İlkbahar',
-      ticketSenderPhone: '#3',
-      ticketPriority: TicketPriority.Dusuk,
-      ticketStatus: TicketStatus.Beklemede,
+      title: 'FİYAT İSTEK3',
+      description: 'Fiyat isteniyor!3',
+      sender: 'MMM İlkbahar',
+      senderPhone: '#3',
+      priority: TicketPriority.Dusuk,
+      status: TicketStatus.Halledildi,
+      isSelected: false,
     ),
   ];
 
@@ -36,5 +39,19 @@ class TicketProvider with ChangeNotifier {
   void addTicket(Ticket newTicket) {
     _tickets.add(newTicket);
     notifyListeners();
+  }
+
+  List<Ticket> findByStatus(String statusStr) {
+    TicketStatus status;
+    if (statusStr == 'resolved') {
+      status = TicketStatus.Halledildi;
+    } else {
+      status = TicketStatus.Beklemede;
+    }
+    return _tickets
+        .where(
+          (ticket) => ticket.status == status,
+        )
+        .toList();
   }
 }

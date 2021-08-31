@@ -1,31 +1,32 @@
 enum TicketStatus {
-  IptalEdildi,
   Beklemede,
   Halledildi,
 }
 
 enum TicketPriority {
   Yuksek,
-  Normal,
+  Orta,
   Dusuk,
 }
 
 class Ticket {
-  final String ticketID = DateTime.now().toString();
-  final String ticketTitle;
-  final String? ticketDescription;
-  final String ticketSender;
-  final String ticketSenderPhone;
-  final TicketPriority? ticketPriority;
-  final TicketStatus? ticketStatus;
-  final DateTime ticketDate = DateTime.now();
+  final String id = DateTime.now().toString();
+  final String title;
+  final String description;
+  final String sender;
+  final String senderPhone;
+  final TicketPriority? priority;
+  TicketStatus? status = TicketStatus.Beklemede;
+  final DateTime date = DateTime.now();
+  bool isSelected = false;
 
   Ticket({
-    required this.ticketTitle,
-    required this.ticketDescription,
-    required this.ticketSender,
-    required this.ticketSenderPhone,
-    required this.ticketPriority,
-    required this.ticketStatus,
+    required this.title,
+    required this.description,
+    required this.sender,
+    required this.senderPhone,
+    required this.priority,
+    required this.isSelected,
+    this.status,
   });
 }

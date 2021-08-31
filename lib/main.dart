@@ -8,6 +8,7 @@ import 'package:ticketing_system/screens/login_screen.dart';
 import 'package:ticketing_system/screens/main_screen.dart';
 import 'package:ticketing_system/screens/register_screen.dart';
 import 'package:ticketing_system/screens/settings_screen.dart';
+import 'package:ticketing_system/screens/ticket_detail_screen.dart';
 import 'package:ticketing_system/widgets/tickets.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: LoginScreen(),
+        home: MainScreen(),
         routes: {
           MainScreen.routeName: (ctx) => MainScreen(),
           AddRequestScreen.routeName: (ctx) => AddRequestScreen(),
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
           ContactScreen.routeName: (ctx) => ContactScreen(),
           LoginScreen.routeName: (ctx) => LoginScreen(),
           RegisterScreen.routeName: (ctx) => RegisterScreen(),
+          TicketDetailScreen.routeName: (ctx) => TicketDetailScreen(),
         },
       ),
     );

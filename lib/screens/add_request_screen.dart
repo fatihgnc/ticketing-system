@@ -22,7 +22,7 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
     if (strPriority == 'high') {
       return TicketPriority.Yuksek;
     } else if (strPriority == 'normal') {
-      return TicketPriority.Normal;
+      return TicketPriority.Orta;
     } else {
       return TicketPriority.Dusuk;
     }
@@ -34,13 +34,13 @@ class _AddRequestScreenState extends State<AddRequestScreen> {
     }
 
     Ticket _ticket = Ticket(
-      ticketTitle: _titleController.text,
-      ticketDescription: _descriptionController.text,
-      ticketSender: _senderController.text,
-      ticketSenderPhone: _senderPhoneController.text,
-      ticketPriority:
+      title: _titleController.text,
+      description: _descriptionController.text,
+      sender: _senderController.text,
+      senderPhone: _senderPhoneController.text,
+      priority:
           _getPriorityAsEnum(_priorityController.text.trim().toLowerCase()),
-      ticketStatus: TicketStatus.Beklemede,
+      isSelected: false,
     );
 
     Provider.of<TicketProvider>(
