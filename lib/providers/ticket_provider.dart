@@ -5,29 +5,32 @@ class TicketProvider with ChangeNotifier {
   List<Ticket> _tickets = [
     Ticket(
       title: 'FİYAT İSTEK',
-      sender: 'Mehmet İlkbahar',
+      senderFullName: 'Mehmet İlkbahar',
       senderPhone: '#1',
       description: 'Fiyat isteniyor!',
       priority: TicketPriority.Yuksek,
       status: TicketStatus.Beklemede,
+      request: TicketRequest.Job,
       isSelected: false,
     ),
     Ticket(
       title: 'FİYAT İSTEK2',
       description: 'Fiyat isteniyor!2',
-      sender: 'Hasan İlkbahar',
+      senderFullName: 'Hasan İlkbahar',
       senderPhone: '#2',
       priority: TicketPriority.Orta,
       status: TicketStatus.Halledildi,
+      request: TicketRequest.Job,
       isSelected: false,
     ),
     Ticket(
       title: 'FİYAT İSTEK3',
       description: 'Fiyat isteniyor!3',
-      sender: 'MMM İlkbahar',
+      senderFullName: 'MMM İlkbahar',
       senderPhone: '#3',
       priority: TicketPriority.Dusuk,
       status: TicketStatus.Halledildi,
+      request: TicketRequest.Demo,
       isSelected: false,
     ),
   ];
@@ -53,5 +56,10 @@ class TicketProvider with ChangeNotifier {
           (ticket) => ticket.status == status,
         )
         .toList();
+  }
+
+  void deleteTicketById(String id) {
+    _tickets.removeWhere((ticket) => ticket.id == id);
+    notifyListeners();
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ticketing_system/models/ticket.dart';
 import 'package:ticketing_system/providers/ticket_provider.dart';
-import 'package:ticketing_system/screens/add_request_screen.dart';
+import 'package:ticketing_system/screens/add_ticket_screen.dart';
 import 'package:ticketing_system/widgets/drawer_item.dart';
 import 'package:ticketing_system/widgets/main_drawer.dart';
 import 'package:ticketing_system/widgets/main_dropdown.dart';

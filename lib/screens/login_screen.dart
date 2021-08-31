@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ticketing_system/providers/user_provider.dart';
+import 'package:ticketing_system/screens/forgot_password_screen.dart';
 import 'package:ticketing_system/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,15 +17,25 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _rememberMe = false;
 
-  void _loginUser() {
+  void _loginUser(BuildContext context) async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
     _formKey.currentState!.save();
     FocusManager.instance.primaryFocus!.unfocus();
+
+    Provider.of<UserProvider>(
+      context,
+      listen: false,
+    ).loginUser(
+      _usernameController.text,
+      _passwordController.text,
+    );
   }
 
   @override
@@ -67,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // USERNAME
                   TextFormField(
                     key: ValueKey('username'),
+                    controller: _usernameController,
                     decoration: const InputDecoration(
                       icon: const Icon(Icons.person),
                       labelText: 'Username',
@@ -84,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // PASSWORD
                   TextFormField(
                     key: ValueKey('password'),
+                    controller: _passwordController,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.password),
                       labelText: 'Password',
@@ -122,6 +141,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(ForgotPasswordScreen.routeName);
+                    },
+                    child: const Text(
+                      'Forgot password?',
+                    ),
+                  ),
                   CheckboxListTile(
                     value: _rememberMe,
                     title: const Text('Remember me'),
@@ -142,7 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CircleAvatar(
                   child: IconButton(
                     icon: const Icon(Icons.login),
-                    onPressed: _loginUser,
+                    onPressed: () => _loginUser(context),
                   ),
                 ),
               ],

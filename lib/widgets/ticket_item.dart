@@ -5,10 +5,9 @@ import 'package:ticketing_system/models/ticket.dart';
 import 'package:ticketing_system/providers/ticket_provider.dart';
 
 class TicketItem extends StatefulWidget {
-  final dropdownValue;
   final Ticket ticket;
 
-  TicketItem(this.dropdownValue, this.ticket);
+  TicketItem(this.ticket);
 
   @override
   _TicketItemState createState() => _TicketItemState();
@@ -55,7 +54,7 @@ class _TicketItemState extends State<TicketItem> {
                 Positioned(
                   top: 15,
                   child: Text(
-                    widget.ticket.senderPhone,
+                    widget.ticket.id,
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 17,
@@ -76,7 +75,7 @@ class _TicketItemState extends State<TicketItem> {
                 Positioned(
                   top: 90,
                   child: Text(
-                    widget.ticket.sender +
+                    widget.ticket.senderFullName +
                         ' - ' +
                         _ticketPriorityLevel(
                           widget.ticket.priority!,

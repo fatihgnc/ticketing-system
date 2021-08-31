@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:ticketing_system/screens/add_request_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:ticketing_system/models/user.dart';
+import 'package:ticketing_system/providers/user_provider.dart';
+import 'package:ticketing_system/screens/add_ticket_screen.dart';
 import 'package:ticketing_system/screens/contact_screen.dart';
 import 'package:ticketing_system/screens/main_screen.dart';
 import 'package:ticketing_system/screens/settings_screen.dart';
@@ -15,6 +20,8 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceHeight = MediaQuery.of(context).size.height;
+    final userInfo = Provider.of<UserProvider>(context, listen: false).user;
+
     return Drawer(
       child: Column(
         children: [
@@ -48,7 +55,7 @@ class MainDrawer extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        'Gigabyteltd',
+                        userInfo.username,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -59,7 +66,7 @@ class MainDrawer extends StatelessWidget {
                         height: 5,
                       ),
                       Text(
-                        'servis@gigabyteltd.com',
+                        userInfo.email,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 15,
@@ -116,7 +123,12 @@ class MainDrawer extends StatelessWidget {
                   DrawerItem(
                     tileIcon: Icons.logout,
                     tileText: 'Log out',
-                    selectFn: () {},
+                    selectFn: () {
+                      Provider.of<UserProvider>(
+                        context,
+                        listen: false,
+                      ).logoutUser();
+                    },
                   ),
                 ],
               ),

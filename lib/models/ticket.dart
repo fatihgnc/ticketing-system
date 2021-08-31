@@ -9,24 +9,45 @@ enum TicketPriority {
   Dusuk,
 }
 
+enum TicketRequest {
+  Price,
+  Job,
+  Project,
+  Demo,
+}
+
 class Ticket {
-  final String id = DateTime.now().toString();
+  final String id = DateTime.now().millisecondsSinceEpoch.toString();
   final String title;
   final String description;
-  final String sender;
+  final String senderFullName;
   final String senderPhone;
+  final String? senderEmail;
+  final String? senderCompanyName;
+  final String? senderCompanyAddress;
+  final String? senderBranchName;
+  final String? senderCity;
+  final String? senderRegion;
+  final TicketRequest request;
   final TicketPriority? priority;
-  TicketStatus? status = TicketStatus.Beklemede;
   final DateTime date = DateTime.now();
+  TicketStatus? status;
   bool isSelected = false;
 
   Ticket({
     required this.title,
     required this.description,
-    required this.sender,
+    required this.senderFullName,
     required this.senderPhone,
     required this.priority,
     required this.isSelected,
-    this.status,
+    required this.request,
+    this.senderEmail,
+    this.senderCompanyName,
+    this.senderCompanyAddress,
+    this.senderCity,
+    this.senderRegion,
+    this.senderBranchName,
+    this.status = TicketStatus.Beklemede,
   });
 }

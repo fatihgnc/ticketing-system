@@ -21,8 +21,8 @@ class Tickets extends StatefulWidget {
 class _TicketsState extends State<Tickets> {
   @override
   Widget build(BuildContext context) {
-    final tickets = Provider.of<TicketProvider>(context, listen: false)
-        .findByStatus(widget.dropdownValue);
+    final tickets =
+        Provider.of<TicketProvider>(context).findByStatus(widget.dropdownValue);
     // inspect(tickets);
     return Container(
       height: double.infinity,
@@ -34,6 +34,9 @@ class _TicketsState extends State<Tickets> {
         itemBuilder: (ctx, i) => Container(
           margin: const EdgeInsets.only(bottom: 6),
           height: 150,
+          decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(.2),
+          ),
           width: double.infinity,
           child: InkWell(
             onTap: () {
@@ -43,7 +46,6 @@ class _TicketsState extends State<Tickets> {
               );
             },
             child: TicketItem(
-              widget.dropdownValue,
               tickets[i],
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:ticketing_system/models/server.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const routeName = '/settings';
@@ -9,31 +11,20 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  String _serverLink = '';
-
   void _saveLink() {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
     _formKey.currentState!.save();
-    print('valid!');
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(_serverLink),
-      ),
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final serverProv = Provider.of<Server>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -46,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Form(
               key: _formKey,
               child: TextFormField(
-                initialValue: _serverLink,
+                initialValue: serverProv.serverLink,
                 keyboardType: TextInputType.url,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
@@ -66,8 +57,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
                 onSaved: (inputVal) {
                   setState(() {
-                    _serverLink = inputVal!.trim().toLowerCase();
+                    serverProv.setServerLink(inputVal as String);
                   });
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Settings saved!'),
+                      backgroundColor: Colors.green,
+                      duration: Duration(
+                        seconds: 1,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),

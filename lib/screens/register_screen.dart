@@ -1,4 +1,11 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ticketing_system/models/user.dart';
+import 'package:ticketing_system/providers/user_provider.dart';
 import 'package:ticketing_system/screens/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -12,14 +19,43 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   final _passController = TextEditingController();
   final _passConfirmController = TextEditingController();
+  final _fullNameController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _regionController = TextEditingController();
+  final _branchController = TextEditingController();
+  final _companyController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _addressController = TextEditingController();
 
-  void _saveUser() {
+  void _saveUser() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
     _formKey.currentState!.save();
     FocusManager.instance.primaryFocus!.unfocus();
+
+    final user = User(
+      fullName: _fullNameController.text,
+      phone: _phoneController.text,
+      email: _emailController.text,
+      companyName: _companyController.text,
+      address: _addressController.text,
+      city: _cityController.text,
+      region: _regionController.text,
+      branchName: _branchController.text,
+      username: _usernameController.text,
+      password: _passController.text,
+    );
+
+    Provider.of<UserProvider>(
+      context,
+      listen: false,
+    ).registerUser(user);
+
+    Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
   }
 
   TextFormField _buildTextField({
@@ -137,6 +173,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     // FULL NAME
                     _buildTextField(
+                      controller: _fullNameController,
                       keyName: 'name',
                       fieldIcon: Icons.text_format,
                       labelText: 'Full Name',
@@ -148,6 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // COMPANY NAME
                     _buildTextField(
+                      controller: _companyController,
                       keyName: 'company',
                       fieldIcon: Icons.business,
                       labelText: 'Company Name',
@@ -160,6 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // BRANCH NAME
                     _buildTextField(
+                      controller: _branchController,
                       keyName: 'branch',
                       fieldIcon: Icons.work,
                       labelText: 'Branch Name',
@@ -172,6 +211,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // PHONE
                     _buildTextField(
+                      controller: _phoneController,
                       keyName: 'phone',
                       keyboardType: TextInputType.number,
                       fieldIcon: Icons.phone,
@@ -184,6 +224,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // EMAIL
                     _buildTextField(
+                      controller: _emailController,
                       keyName: 'email',
                       keyboardType: TextInputType.emailAddress,
                       fieldIcon: Icons.email,
@@ -199,6 +240,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // ADDRESS
                     _buildTextField(
+                      controller: _addressController,
                       keyName: 'address',
                       fieldIcon: Icons.location_city,
                       labelText: 'Address',
@@ -211,6 +253,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // CITY
                     _buildTextField(
+                      controller: _cityController,
                       keyName: 'city',
                       fieldIcon: Icons.place,
                       labelText: 'City',
@@ -223,6 +266,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // REGION
                     _buildTextField(
+                      controller: _regionController,
                       keyName: 'region',
                       fieldIcon: Icons.place_outlined,
                       labelText: 'Region',
@@ -235,6 +279,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // USERNAME
                     _buildTextField(
+                      controller: _usernameController,
                       keyName: 'username',
                       fieldIcon: Icons.person,
                       labelText: 'Username',
@@ -247,10 +292,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // PASSWORD
                     _buildTextField(
+                      controller: _passController,
                       keyName: 'password',
                       fieldIcon: Icons.password,
                       labelText: 'Password',
-                      controller: _passController,
                       obscureText: true,
                       validator: (inputVal) => _validateInput(
                         inputVal: inputVal!,
@@ -264,10 +309,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     // CONFIRM PASSWORD
                     _buildTextField(
+                      controller: _passConfirmController,
                       keyName: 'confPassword',
                       fieldIcon: Icons.password,
                       labelText: 'Confirm Password',
-                      controller: _passConfirmController,
                       obscureText: true,
                       validator: (inputVal) => _validateInput(
                         inputVal: inputVal!,
