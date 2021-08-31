@@ -9,15 +9,15 @@ class UserProvider with ChangeNotifier {
 
   List<User> _users = [
     User(
-      fullName: 'Fatih Genç',
-      phone: '05338329901',
+      fullName: 'Hasan İlkbahar',
+      phone: '+905338801122',
       email: 'email@test.com',
-      companyName: 'companyname',
-      address: 'myaddress',
-      city: 'mycity',
-      region: 'myregion',
-      branchName: 'mybranch',
-      username: 'myusername',
+      companyName: 'Gigabyte Ltd.',
+      address: 'Küçük Kaymaklı',
+      city: 'Lefkoşa',
+      region: 'Kaymaklı',
+      branchName: 'Software',
+      username: 'hasanilkbahar',
       password: 'password',
     ),
   ];
